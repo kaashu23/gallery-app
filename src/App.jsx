@@ -33,7 +33,7 @@ const App = () => {
         getData={getData}
       />
 
-      {/* 🍗 Meals Component */}
+
       <MealList meals={meals} />
 
     </div>
