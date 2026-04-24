@@ -5,18 +5,23 @@ import MealList from './components/MealList'
 
 const App = () => {
 
-  const [meals, setMeals] = useState([])
+  const [meals, setMeals] = useState(null)
   const [mealName, setMealName] = useState('')
 
-  const getData = async (a) => {
-    const response = await axios.get(
-      `https://www.themealdb.com/api/json/v1/1/search.php?s=${mealName || a}`
-    )
-    setMeals(response.data.meals || [])
+  const getData = async (query) => {
+    try {
+      const response = await axios.get(
+        `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`
+      )
+      setMeals(response.data.meals || [])
+    } catch (error) {
+      console.log(error)
+      setMeals([])
+    }
   }
 
-  useEffect(() => {// eslint-disable-next-line react-hooks/set-state-in-effect
-    getData('Chicken')
+  useEffect(() => {
+    getData('chicken')
   }, [])
 
   return (
@@ -26,13 +31,11 @@ const App = () => {
         Meals Names
       </h1>
 
-
       <SearchBar
         mealName={mealName}
         setMealName={setMealName}
         getData={getData}
       />
-
 
       <MealList meals={meals} />
 

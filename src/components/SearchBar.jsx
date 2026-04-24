@@ -13,7 +13,7 @@ const SearchBar = ({ mealName, setMealName, getData }) => {
       />
 
       <button
-        onClick={() => getData()}
+        onClick={() => getData(mealName)}
         className="bg-blue-500 hover:bg-blue-600 transition px-6 py-2 rounded-xl font-semibold shadow-md"
       >
         Search
